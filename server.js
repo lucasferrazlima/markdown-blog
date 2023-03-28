@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
+const methodOverride = require('method-override');
 const Article = require('./models/article');
 const articleRouter = require('./routes/articles');
 
@@ -18,6 +19,7 @@ mongoose.connect(`mongodb+srv://${atlasUsername}:${atlasPassword}@test.zajgzpb.m
 app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride('_method'));
 
 app.get('/', async (request, response) => {
   const articles = await Article.find().sort({ createdAt: 'desc' });
