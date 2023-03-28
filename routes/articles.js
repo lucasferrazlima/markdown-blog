@@ -24,7 +24,7 @@ router.post('/', async (request, response) => {
   });
   try {
     article = await article.save();
-    response.redirect(`/articles/${article.id}`);
+    response.redirect(`articles/${article.id}`);
   } catch (e) {
     response.render('articles/new', { article });
   }

@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
+const Article = require('./models/article');
 const articleRouter = require('./routes/articles');
 
 const app = express();
@@ -18,17 +19,8 @@ app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (request, response) => {
-  const articles = [{
-    title: 'Title Test',
-    createdAt: new Date(),
-    description: 'Description test',
-  },
-  {
-    title: 'Title Test 2',
-    createdAt: new Date(),
-    description: 'Description test',
-  }];
+app.get('/', async (request, response) => {
+  const articles = await Article.find().sort({ createdAt: 'desc' });
   response.render('articles/index', { articles });
 });
 
