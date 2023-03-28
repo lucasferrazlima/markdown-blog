@@ -8,8 +8,9 @@ router.get('/new', (request, response) => {
   response.render('articles/new', { article });
 });
 
-router.get('/:id', async (request, response) => {
-  const article = await Article.findById(request.params.id);
+router.get('/:slug', async (request, response) => {
+  const article = await Article.findOne({ slug: request.params.slug });
+  console.log(article);
   if (article == null) {
     response.redirect('/');
   }
@@ -24,7 +25,7 @@ router.post('/', async (request, response) => {
   });
   try {
     article = await article.save();
-    response.redirect(`articles/${article.id}`);
+    response.redirect(`articles/${article.slug}`);
   } catch (e) {
     response.render('articles/new', { article });
   }
