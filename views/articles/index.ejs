@@ -19,6 +19,7 @@
                     <div class="card-text mb-2"><%= article.description %></div>
                     <a href="/articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
                     <!-- Using an <a> tag to make a DELETE request is not recommended because it can cause unintended actions to be taken by web crawlers and search engines that follow the links on your website. -->
+                    <a href="/articles/edit/<%= article.id %>" class="btn btn-secondary">Edit</a>
                     <form action="/articles/<%= article.id %>?_method=DELETE" method="post" class="d-inline">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
